@@ -1,6 +1,9 @@
 from time import sleep
 from random import randint, seed
-import msvcrt
+from colorama import Fore, Style
+import colorama
+
+colorama.init()
 
 Min = 1
 Max = 9
@@ -24,9 +27,9 @@ def makeAnser():
     return first + second
 
 while True:
-    print("Halo~")
+    print(f"{Fore.GREEN}{Style.BRIGHT}Halo~")
     showControls()
-    Input =  msvcrt.getch()
+    Input = input()
     if Input == "s":
         while True:
             Ans = makeAnser()
@@ -34,9 +37,9 @@ while True:
             if Input == "c":
                 break
             elif Input == str(Ans):
-                print("Nice")
+                print(f"{Fore.BLUE}Nice!")
             else:
-                print("wrong mf")
+                print(f"{Fore.RED}wrong mf")
                 print(f"Right: {Ans}")
             sleep(.3)
 
