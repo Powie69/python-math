@@ -55,6 +55,10 @@ while True:
                 print(f"{Fore.RED}wrong mf")
                 print(f"Right: {Ans}")
             sleep(.3)
+    elif Input == "range":
+        minInput = input("enter mininuim: ")
+        maxInput = input("enter maxicum: ")
+        setRange(minInput,maxInput)
     elif Input == "ts":
         toggleSeed()
    
