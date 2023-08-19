@@ -8,7 +8,6 @@ colorama.init()
 Min = 1
 Max = 9
 
-Seed = 69420
 seedToggled = False
 
 def setRange(min=1,max=9):
@@ -21,8 +20,6 @@ def showControls():
     print('"S" = start')
     print('"range" = set the range of numbers')
     print('"ts" = toggle seeding')
-    print('"ss" = set seed')
-    # print('"S" = start')
 
 def makeAnser():
     first = randint(Min,Max)
@@ -34,15 +31,13 @@ def toggleSeed():
     global seedToggled
     if seedToggled == True:
         seed(randint(9,32767))
+        seedToggled = False
         print("turning off seed")
     else:
-        seed(Seed)
-        seedToggled = True
-        print("turning on seed")
+        Input = input("enter seed: ")
+        seed(Input)
+        print("tfajsdlfjadklfjeiourning on seed")
 
-def setSeed():
-    Input = input("enter seed: ")
-    Seed = Input
 
 while True:
     print(f"{Fore.GREEN}{Style.BRIGHT}Halo~")
@@ -62,9 +57,7 @@ while True:
             sleep(.3)
     elif Input == "ts":
         toggleSeed()
-    elif Input == "ss":
-        setSeed()        
-
+   
     
     
     sleep(1)
