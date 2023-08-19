@@ -1,1 +1,1 @@
-# python matha
+# python math
