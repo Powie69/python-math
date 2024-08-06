@@ -14,14 +14,16 @@ numSet = 0
 
 
 def setNum():
-	global isNumSet
+	global isNumSet, numSet
 	if isNumSet == True:
 		isNumSet = False
 		print("Turning off setNum")
 	else:
-		isNumSet = True
 		Input = input("Number: ")
-		numSet = Input
+		if not Input.isdigit():
+			return print('not a number')
+		isNumSet = True
+		numSet = int(Input)
 		print(f"Turning on setNum: {numSet}")
 
 def	setRange(min=1,max=9):
@@ -36,7 +38,6 @@ def showControls():
 	print('"ts" = toggle seeding')
 
 def makeAnser():
-	# first = 69
 	if isNumSet == True:
 		first = numSet
 	else:
@@ -83,9 +84,7 @@ while True:
 		toggleSeed()
 	elif Input == "sn":
 		setNum()
-	
+
 	else:
 		print("what u talkin' about?")
-	
-	
 	sleep(1)
