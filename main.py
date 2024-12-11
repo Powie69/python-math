@@ -10,8 +10,7 @@ Max = 9
 
 seedToggled = False
 isNumSet = False
-numSet = 0
-
+numSet = None
 
 def setNum():
 	global isNumSet, numSet
@@ -77,14 +76,13 @@ while True:
 				print(f"Right: {Ans}")
 			sleep(.3)
 	elif Input == "range":
-		minInput = input("enter mininuim: ")
-		maxInput = input("enter maxicum: ")
+		minInput = input("enter minimum: ")
+		maxInput = input("enter maximum: ")
 		setRange(minInput,maxInput)
 	elif Input == "ts":
 		toggleSeed()
 	elif Input == "sn":
 		setNum()
-
 	else:
 		print("what u talkin' about?")
 	sleep(1)
