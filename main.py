@@ -1,5 +1,5 @@
 from time import sleep
-from random import randint, seed, shuffle
+from random import randint, seed, shuffle, choice
 from colorama import Fore, Style
 import colorama
 
@@ -8,22 +8,23 @@ colorama.init()
 Min = 1
 Max = 9
 
-seedToggled = False
 isNumSet = False
-numSet = None
+numSet = [0]
 
 def setNum(Args):
 	global isNumSet, numSet
 	if len(Args) <= 1:
 		isNumSet = False
 		return print("setNum disabled")
-	if not Args[1].isdigit():
-		return print('not a number')
+	for arg in Args[1:]:
+		if not arg.isdigit():
+			return print(f"'{arg}' is not a number")
+
 	isNumSet = True
-	numSet = int(Args[1])
+	numSet = [int(arg) for arg in Args[1:]]
 	print(f"Turning on setNum: {numSet}")
 
-def	setRange(Args):
+def setRange(Args):
 	if len(Args) < 3:
 		return
 	global Min, Max
@@ -42,13 +43,12 @@ def showControls():
 	print('"sn" = set number')
 
 def makeAnser():
-	digits = [numSet, randint(Min, Max)] if isNumSet else [randint(Min, Max), randint(Min, Max)]
+	digits = [choice(numSet), randint(Min, Max)] if isNumSet else [randint(Min, Max), randint(Min, Max)]
 	shuffle(digits)
 	print(f"{digits[0]} + {digits[1]}")
 	return sum(digits)
 
 def toggleSeed(Args):
-	global seedToggled
 	if len(Args) <= 1:
 		print('setting random seed')
 		seed(randint(9,32767))
@@ -56,35 +56,28 @@ def toggleSeed(Args):
 	if not Args[1].isdigit():
 		return print('not a number!')
 	seed(Args[1])
-	print('')
+	print(f'seed toggled to {Args[1]}')
 
 
 showControls()
 
 while True:
 	print(f"{Fore.GREEN}{Style.BRIGHT}Halo~")
+	Ans = makeAnser()
 	Input = input().lower().split()
+	if len(Input) < 1:
+		continue
 	command = Input[0]
-	print(Input)
-	if command == "s":
-		# game loop
-		while True:
-			Ans = makeAnser()
-			Input = input().lower()
-			if Input == "c":
-				break
-			elif Input == str(Ans):
-				print(f"{Fore.BLUE}Nice!")
-			else:
-				print(f"{Fore.RED}wrong mf")
-				print(f"Right: {Ans}")
-			sleep(.3)
-	elif command == "range":
+	# print(Input)
+	if command == "range":
 		setRange(Input)
 	elif command == "ts":
 		toggleSeed(Input)
 	elif command == "sn":
 		setNum(Input)
+	elif command == str(Ans):
+		print(f"{Fore.BLUE}Nice!")
 	else:
-		print("what u talkin' about?")
-	sleep(.5)
+		print(f"{Fore.RED}wrong mf")
+		print(f"Right: {Ans}")
+	sleep(.3)
